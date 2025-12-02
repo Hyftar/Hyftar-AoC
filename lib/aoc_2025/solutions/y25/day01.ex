@@ -46,7 +46,7 @@ defmodule Aoc2025.Solutions.Y25.Day01 do
   def count_zeroes(_direction, _current, amount, count) when amount == 0, do: count
 
   def count_zeroes("R", current, amount, count) do
-    if (current + amount >= 100) do
+    if current + amount >= 100 do
       count_zeroes("R", 0, amount - (100 - current), count + 1)
     else
       final = current + amount
@@ -55,7 +55,7 @@ defmodule Aoc2025.Solutions.Y25.Day01 do
   end
 
   def count_zeroes("L", current, amount, count) do
-    if (current - amount < 0) do
+    if current - amount < 0 do
       new_count = if current == 0, do: count, else: count + 1
       count_zeroes("L", 99, amount - current - 1, new_count)
     else
