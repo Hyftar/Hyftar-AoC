@@ -30,7 +30,7 @@ defmodule Aoc2025.Solutions.Y25.Day09Test do
   # Once your part one was successfully sumbitted, you may uncomment this test
   # to ensure your implementation was not altered when you implement part two.
 
-  @part_one_solution 4749838800
+  @part_one_solution 4_749_838_800
 
   test "part one solution" do
     assert {:ok, @part_one_solution} == AoC.run(2025, 9, :part_one)
@@ -66,7 +66,7 @@ defmodule Aoc2025.Solutions.Y25.Day09Test do
     assert 24 == solve(input, :part_two)
   end
 
-  @part_two_solution 1624057680
+  @part_two_solution 1_624_057_680
 
   test "part two solution" do
     assert {:ok, @part_two_solution} == AoC.run(2025, 9, :part_two)

@@ -5,7 +5,7 @@ defmodule Aoc2025.Solutions.Y25.Day09 do
   def parse(input, :part_one) do
     Input.read!(input)
     |> String.split("\n", trim: true)
-    |> Enum.map(&String.split(&1, ",") )
+    |> Enum.map(&String.split(&1, ","))
     |> Enum.map(fn row -> row |> Enum.map(&String.to_integer/1) |> List.to_tuple() end)
   end
 
@@ -13,7 +13,7 @@ defmodule Aoc2025.Solutions.Y25.Day09 do
     points =
       Input.read!(input)
       |> String.split("\n", trim: true)
-      |> Enum.map(&String.split(&1, ",") )
+      |> Enum.map(&String.split(&1, ","))
       |> Enum.map(fn row -> row |> Enum.map(&String.to_integer/1) |> List.to_tuple() end)
 
     points
@@ -25,14 +25,12 @@ defmodule Aoc2025.Solutions.Y25.Day09 do
   def part_one(problem) do
     problem
     |> Enum.with_index()
-    |> Enum.map(
-      fn {a, i} ->
-        problem
-        |> Stream.drop(i)
-        |> Stream.map(&{a, &1, square_size(a, &1)})
-        |> Enum.max_by(&elem(&1, 2))
-      end
-    )
+    |> Enum.map(fn {a, i} ->
+      problem
+      |> Stream.drop(i)
+      |> Stream.map(&{a, &1, square_size(a, &1)})
+      |> Enum.max_by(&elem(&1, 2))
+    end)
     |> Enum.max_by(&elem(&1, 2))
     |> elem(2)
   end
@@ -42,37 +40,31 @@ defmodule Aoc2025.Solutions.Y25.Day09 do
 
     points
     |> Enum.with_index()
-    |> Enum.flat_map(
-      fn {a, i} ->
-        points
-        |> Stream.drop(i)
-        |> Stream.map(&{a, &1, square_size(a, &1)})
-      end
-    )
+    |> Enum.flat_map(fn {a, i} ->
+      points
+      |> Stream.drop(i)
+      |> Stream.map(&{a, &1, square_size(a, &1)})
+    end)
     |> Enum.sort_by(fn {_, _, size} -> size end, :desc)
-    |> Enum.filter(
-      fn {a1, a2, _} ->
-        not Enum.any?(
-          lines,
-          fn [b1, b2] ->
-            collision?({a1, a2}, {b1, b2})
-              or collision?({a1, a2}, {b1, b1})
-              or collision?({a1, a2}, {b2, b2})
-          end
-        )
-      end
-    )
-    |> Enum.filter(
-      fn {{x1, y1}, {x2, y2}, _} ->
-        Enum.count(
-          lines,
-          fn [b1, b2] ->
-            collision?({{min(x1, x2) + 1, 0}, {min(x1, x2) + 1, min(y1, y2) + 1}}, {b1, b2})
-          end
-        )
-        |> Integer.is_odd()
-      end
-    )
+    |> Enum.filter(fn {a1, a2, _} ->
+      not Enum.any?(
+        lines,
+        fn [b1, b2] ->
+          collision?({a1, a2}, {b1, b2}) or
+            collision?({a1, a2}, {b1, b1}) or
+            collision?({a1, a2}, {b2, b2})
+        end
+      )
+    end)
+    |> Enum.filter(fn {{x1, y1}, {x2, y2}, _} ->
+      Enum.count(
+        lines,
+        fn [b1, b2] ->
+          collision?({{min(x1, x2) + 1, 0}, {min(x1, x2) + 1, min(y1, y2) + 1}}, {b1, b2})
+        end
+      )
+      |> Integer.is_odd()
+    end)
     |> hd()
     |> elem(2)
   end
