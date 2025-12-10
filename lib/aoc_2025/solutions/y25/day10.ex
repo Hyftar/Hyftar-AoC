@@ -114,7 +114,8 @@ defmodule Aoc2025.Solutions.Y25.Day10 do
   defp solve_with_highs({patterns, joltage}) do
     lp_content = generate_lp(patterns, joltage)
 
-    tmp_file = "/tmp/highs_problem_#{:erlang.unique_integer([:positive])}.lp"
+    tmp_file = "tmp/highs_problem_#{:erlang.unique_integer([:positive])}.lp"
+
     File.write!(tmp_file, lp_content)
 
     {output, 0} = System.cmd("/opt/homebrew/bin/highs", [tmp_file], stderr_to_stdout: true)

@@ -16,10 +16,13 @@ erl_crash.dump
 # Also ignore archive artifacts (built via "mix archive.build").
 *.ez
 
+*.log
+
 # Ignore package tarball (built via "mix hex.build").
 aoc_2025-*.tar
 
 # Temporary files, for example, from tests.
-/tmp/
+/tmp/*
+!/tmp/.keep
 
 .elixir_ls
