@@ -88,25 +88,21 @@ defmodule Aoc2025.Solutions.Y25.Day10 do
 
   def part_two(problem) do
     problem
-    |> Stream.map(
-      fn {_lights_pattern, switches_patterns, joltage} ->
-        base_pattern = List.duplicate(0, length(joltage))
+    |> Stream.map(fn {_lights_pattern, switches_patterns, joltage} ->
+      base_pattern = List.duplicate(0, length(joltage))
 
-        switches_patterns
-        |> Enum.map(
-          fn switch_pattern ->
-            switch_pattern
-            |> Enum.reduce(
-              base_pattern,
-              fn index, acc ->
-                List.replace_at(acc, index, 1)
-              end
-            )
+      switches_patterns
+      |> Enum.map(fn switch_pattern ->
+        switch_pattern
+        |> Enum.reduce(
+          base_pattern,
+          fn index, acc ->
+            List.replace_at(acc, index, 1)
           end
         )
-        |> then(fn patterns -> {patterns, joltage} end)
-      end
-    )
+      end)
+      |> then(fn patterns -> {patterns, joltage} end)
+    end)
     |> Stream.map(&solve_with_highs(&1))
     |> Enum.sum()
   end
