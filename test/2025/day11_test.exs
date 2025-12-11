@@ -55,9 +55,9 @@ defmodule HyftarAoc.Solutions.Y25.Day11Test do
     assert 2 == solve(input, :part_two)
   end
 
-  # @part_two_solution CHANGE_ME
-  #
-  # test "part two solution" do
-  #   assert {:ok, @part_two_solution} == AoC.run(2025, 11, :part_two)
-  # end
+  @part_two_solution 511378159390560
+
+  test "part two solution" do
+    assert {:ok, @part_two_solution} == AoC.run(2025, 11, :part_two)
+  end
 end
