@@ -24,9 +24,9 @@ defmodule HyftarAoc.Solutions.Y25.Day11 do
     count_paths(:svr, graph, :out, false, false)
   end
 
-  defmemo count_paths(current, _graph, exit, visited_dac, visited_fft) when current == exit do
-    if visited_dac and visited_fft, do: 1, else: 0
-  end
+  defmemo(count_paths(current, _graph, current, true, true), do: 1)
+
+  defmemo(count_paths(current, _graph, current, _, _), do: 0)
 
   defmemo count_paths(current, graph, exit, visited_dac, visited_fft) do
     Map.get(graph, current, [])
